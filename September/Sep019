@@ -1,0 +1,65 @@
+// Problem: Min Add to Make Parentheses Valid
+// Date: 2025-09-19
+
+/* JAVA SOLUTION
+class Solution {
+    public int minParentheses(String s) {
+        int balance = 0;     // unmatched '(' count
+        int insertions = 0;  // required insertions for unmatched ')'
+
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                balance++;
+            } else { // ch == ')'
+                if (balance > 0) {
+                    balance--; // match with previous '('
+                } else {
+                    insertions++; // need one '(' before this
+                }
+            }
+        }
+        return insertions + balance;
+    }
+}
+*/
+
+/* PYTHON SOLUTION
+class Solution:
+    def minParentheses(self, s: str) -> int:
+        balance = 0     # unmatched '(' count
+        insertions = 0  # required insertions for unmatched ')'
+
+        for ch in s:
+            if ch == '(':
+                balance += 1
+            else:  # ch == ')'
+                if balance > 0:
+                    balance -= 1  # match with previous '('
+                else:
+                    insertions += 1  # need one '(' before this
+
+        return insertions + balance
+*/
+
+/* CPP SOLUTION
+class Solution {
+public:
+    int minParentheses(string s) {
+        int balance = 0;     // unmatched '(' count
+        int insertions = 0;  // required insertions for unmatched ')'
+
+        for (char ch : s) {
+            if (ch == '(') {
+                balance++;
+            } else { // ch == ')'
+                if (balance > 0) {
+                    balance--; // match with previous '('
+                } else {
+                    insertions++; // need one '(' before this
+                }
+            }
+        }
+        return insertions + balance;
+    }
+};
+*/
