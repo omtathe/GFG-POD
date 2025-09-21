@@ -1,0 +1,46 @@
+// Problem Of The Day
+// 21 September
+// Max rectangle
+
+import java.util.*;
+
+class Solution {
+    static int maxArea(int mat[][]) {
+        int n = mat.length;
+        int m = mat[0].length;
+        
+        int[] heights = new int[m];
+        int maxArea = 0;
+        
+        for (int i = 0; i < n; i++) {
+            // Build histogram
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) heights[j] = 0;
+                else heights[j] += 1;
+            }
+            // Compute largest area for this histogram
+            maxArea = Math.max(maxArea, largestRectangleArea(heights));
+        }
+        
+        return maxArea;
+    }
+    
+    // Largest Rectangle in Histogram (stack based)
+    static int largestRectangleArea(int[] heights) {
+        Stack<Integer> stack = new Stack<>();
+        int maxArea = 0;
+        int n = heights.length;
+        
+        for (int i = 0; i <= n; i++) {
+            int h = (i == n ? 0 : heights[i]);
+            while (!stack.isEmpty() && h < heights[stack.peek()]) {
+                int height = heights[stack.pop()];
+                int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                maxArea = Math.max(maxArea, height * width);
+            }
+            stack.push(i);
+        }
+        
+        return maxArea;
+    }
+}
